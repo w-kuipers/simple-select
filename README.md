@@ -39,6 +39,19 @@ OR
 </div>
 ```
 
+## Getting Selected Values
+
+Simple Select dispatches a custom `select` event when an option is selected. You can listen for this event to get the selected value:
+
+```javascript
+const select = document.querySelector('.simple-select');
+select.addEventListener('select', function(event) {
+    console.log(event.detail.value); // The selected value
+});
+```
+
+The `event.detail.value` contains the `data-value` attribute of the selected option. If no `data-value` is specified, it will contain the text content of the option.
+
 ## Customization
 Simple Select is designed to be easily styled. You can customize the appearance by extending the default CSS classes:
 
