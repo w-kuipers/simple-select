@@ -1,0 +1,15 @@
+{
+  "name": "simple-select",
+  "version": "1.0.0",
+  "description": "A simple select component",
+  "main": "dist/simple-select.min.js",
+  "scripts": {
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "esbuild src/simple-select.js --bundle --minify --outfile=dist/simple-select.min.js --banner:js=\"/* Copyright (c) 2024 Simple Select. All rights reserved. */\"",
+    "build:css": "sass src/simple-select.scss:dist/simple-select.min.css --style compressed --no-source-map"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.1",
+    "sass": "^1.71.0"
+  }
+} 
