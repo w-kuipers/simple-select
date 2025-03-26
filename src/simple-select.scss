@@ -59,7 +59,7 @@
   &-option {
     cursor: pointer;
 
-    &.selected {
+    &.simple-select-selected {
       pointer-events: none;
     }
   }
