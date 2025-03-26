@@ -56,17 +56,11 @@
     }
   }
 
-  .select-option {
+  .simple-select-option {
     cursor: pointer;
 
     &.selected {
       pointer-events: none;
     }
-  }
-
-  .select-chevron {
-    width: 1.25rem;
-    height: 1.25rem;
-    fill: currentColor;
   }
 }
