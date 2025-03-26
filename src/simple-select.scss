@@ -5,17 +5,11 @@
 
   &-trigger {
     width: 100%;
-    font-size: 1.6rem;
-    border-radius: 0.3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     z-index: 11;
-    height: 6rem;
-    padding: 1.7rem 2rem;
-    font-weight: 500;
-    line-height: 2.56rem;
 
     &:after {
       content: "";
@@ -47,14 +41,11 @@
     width: 90%;
     max-height: 40rem;
     overflow-y: auto;
-    border-radius: 0.7rem;
     z-index: 10;
     visibility: hidden;
     transform: translateY(-5rem);
     opacity: 0;
-    padding: 0.5rem;
     display: flex;
-    gap: 0.2rem;
     flex-direction: column;
 
     &.open {
@@ -66,9 +57,7 @@
   }
 
   .select-option {
-    padding: 0.5rem 0.75rem;
     cursor: pointer;
-    border-radius: 0.7rem;
 
     &.selected {
       pointer-events: none;
