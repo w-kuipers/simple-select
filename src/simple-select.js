@@ -3,7 +3,7 @@ class SimpleSelect {
 		this.wrapper = wrapper;
 		this.trigger = wrapper.querySelector(".simple-select-trigger");
 		this.dropdown = wrapper.querySelector(".simple-select-dropdown");
-		this.selectedValueEl = wrapper.querySelector(".selected");
+		this.selectedValueEl = wrapper.querySelector(".simple-select-selected");
 		this.options = Array.from(
 			wrapper.querySelectorAll(".simple-select-option"),
 		);
@@ -96,8 +96,10 @@ class SimpleSelect {
 	}
 
 	selectOption(option) {
-		this.options.forEach((opt) => opt.classList.remove("selected"));
-		option.classList.add("selected");
+		this.options.forEach((opt) =>
+			opt.classList.remove("simple-select-selected"),
+		);
+		option.classList.add("simple-select-selected");
 		this.selectedValueEl.textContent = option.textContent;
 		this.closeDropdown();
 		this.trigger.focus();
