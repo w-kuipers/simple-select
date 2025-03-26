@@ -3,7 +3,11 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - "v1.*"
+
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build-and-release:
@@ -19,26 +23,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update version from tag
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
-          npm version $VERSION --no-git-tag-version
-
       - name: Build
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          DATE=$(date +%Y-%m-%d)
-          # Build JS with copyright
-          esbuild src/simple-select.js --bundle --minify --outfile=dist/simple-select.min.js --banner:js="/*!\n * Simple Select v${VERSION}\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 Simple Select\n * Released under the MIT License\n * Date: ${DATE}\n */"
-          # Build CSS with copyright
-          echo "/*!\n * Simple Select v${VERSION}\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 Simple Select\n * Released under the MIT License\n * Date: ${DATE}\n */" > dist/simple-select.min.css
-          sass src/simple-select.scss --style compressed --no-source-map >> dist/simple-select.min.css
+        run: npm run build
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref_name }}
@@ -48,7 +40,7 @@ jobs:
       - name: Upload JS Artifact
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist/simple-select.min.js
@@ -58,7 +50,7 @@ jobs:
       - name: Upload CSS Artifact
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist/simple-select.min.css
