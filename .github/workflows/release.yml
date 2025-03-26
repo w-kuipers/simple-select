@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "v1.*"
+      - "v*"
 
 jobs:
   build-and-release:
@@ -19,8 +19,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Update version from tag
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          npm version $VERSION --no-git-tag-version
+
       - name: Build
-        run: npm run build
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          DATE=$(date +%Y-%m-%d)
+          # Build JS with copyright
+          esbuild src/simple-select.js --bundle --minify --outfile=dist/simple-select.min.js --banner:js="/*!\n * Simple Select v${VERSION}\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 Simple Select\n * Released under the MIT License\n * Date: ${DATE}\n */"
+          # Build CSS with copyright
+          echo "/*!\n * Simple Select v${VERSION}\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 Simple Select\n * Released under the MIT License\n * Date: ${DATE}\n */" > dist/simple-select.min.css
+          sass src/simple-select.scss --style compressed --no-source-map >> dist/simple-select.min.css
 
       - name: Create Release
         id: create_release
