@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2024-04-22
+### Added
+- Added support for `data-update-label-on-select` attribute to control whether the trigger button text updates on selection
+
 ## [1.0.4] - 2024-03-21
 ### Added
 - Added comprehensive documentation for getting selected values using custom events

@@ -125,6 +125,20 @@ Simple Select is designed to be easily styled. You can customize the appearance 
 }
 ```
 
+## Data Attributes
+
+Simple Select supports various data attributes to customize its behavior:
+
+### data-update-label-on-select
+
+By default, the trigger button's text content is updated when an option is selected. You can disable this behavior by setting `data-update-label-on-select="false"`:
+
+```html
+<div class="simple-select" data-update-label-on-select="false">
+  <!-- ... rest of the select markup ... -->
+</div>
+```
+
 ## License
 
 MIT License - feel free to use this in any project, personal or commercial.
