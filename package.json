@@ -5,7 +5,7 @@
   "main": "dist/simple-select.min.js",
   "scripts": {
     "build": "npm run build:js && npm run build:css",
-    "build:js": "esbuild src/simple-select.js --bundle --minify --outfile=dist/simple-select.min.js --banner:js=\"/*!\n * Simple Select v$npm_package_version\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 Simple Select\n * Released under the MIT License\n * Date: $(date +%Y-%m-%d)\n */\"",
+    "build:js": "esbuild src/simple-select.js --bundle --minify --outfile=dist/simple-select.min.js --banner:js=\"/*!\n * Simple Select v$npm_package_version\n * https://github.com/w-kuipers/simple-select\n * Copyright (c) 2024 - 2025 Simple Select\n * Released under the MIT License\n * Date: $(date +%Y-%m-%d)\n */\"",
     "build:css": "sass src/simple-select.scss:dist/simple-select.min.css --style compressed --no-source-map"
   },
   "devDependencies": {
