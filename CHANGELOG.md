@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2024-04-22
+### Changed
+- Moved label update and dropdown selection highlighting to be triggered by the "select" event
+- Improved code organization by centralizing visual updates in the event handler
+- Enhanced dropdown positioning by setting trigger to `position: relative` with proper z-index layering to support optional transition effects
+
 ## [1.0.5] - 2024-04-22
 ### Added
 - Added support for `data-update-label-on-select` attribute to control whether the trigger button text updates on selection
