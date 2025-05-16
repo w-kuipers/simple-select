@@ -82,6 +82,23 @@ class SimpleSelect {
         }
       });
     });
+
+    // Add event listener for the select event
+    this.wrapper.addEventListener("select", (e) => {
+      if (this.updateLabelOnSelect) {
+        const selectedOption = this.options.find(
+          (opt) => opt.dataset.value === e.detail.value,
+        );
+        if (selectedOption) {
+          this.selectedValueEl.textContent = selectedOption.textContent;
+          // Update the selected state in the dropdown
+          this.options.forEach((opt) =>
+            opt.classList.remove("simple-select-selected"),
+          );
+          selectedOption.classList.add("simple-select-selected");
+        }
+      }
+    });
   }
 
   toggleDropdown() {
@@ -106,14 +123,6 @@ class SimpleSelect {
   }
 
   selectOption(option) {
-    this.options.forEach((opt) =>
-      opt.classList.remove("simple-select-selected"),
-    );
-    option.classList.add("simple-select-selected");
-
-    if (this.updateLabelOnSelect)
-      this.selectedValueEl.textContent = option.textContent;
-
     this.closeDropdown();
     this.trigger.focus();
 
