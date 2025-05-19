@@ -49,6 +49,12 @@
     display: flex;
     flex-direction: column;
 
+    &.up {
+      top: unset;
+      bottom: calc(100% + 0.5rem);
+      transform: translateY(5rem);
+    }
+
     &.open {
       visibility: visible;
       transform: translateY(0);
