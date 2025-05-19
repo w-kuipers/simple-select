@@ -115,7 +115,7 @@ class SimpleSelect {
 	}
 
 	toggleDropdown() {
-		const shouldOpenUpwards = this.checkAvailableSpace();
+		const shouldOpenUpwards = this.shouldOpenUpwards();
 		this.dropdown.classList.remove("up");
 		if (shouldOpenUpwards) {
 			this.dropdown.classList.add("up");
@@ -130,7 +130,7 @@ class SimpleSelect {
 	}
 
 	openDropdown() {
-		const shouldOpenUpwards = this.checkAvailableSpace();
+		const shouldOpenUpwards = this.shouldOpenUpwards();
 		this.dropdown.classList.remove("up");
 		if (shouldOpenUpwards) {
 			this.dropdown.classList.add("up");
