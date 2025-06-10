@@ -40,14 +40,7 @@ class SimpleSelect {
       }
     });
 
-    this.options.forEach((option) => {
-      option.addEventListener("click", () => this.selectOption(option));
-      option.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          this.selectOption(option);
-        }
-      });
-    });
+    this.attachOptionListeners();
 
     // Keyboard navigation
     this.trigger.addEventListener("keydown", (e) => {
@@ -65,27 +58,6 @@ class SimpleSelect {
       }
     });
 
-    this.options.forEach((option, index) => {
-      option.setAttribute("tabindex", "-1");
-      option.addEventListener("keydown", (e) => {
-        switch (e.key) {
-          case "ArrowDown":
-            e.preventDefault();
-            this.focusNextOption(index);
-            break;
-          case "ArrowUp":
-            e.preventDefault();
-            this.focusPreviousOption(index);
-            break;
-          case "Escape":
-            e.preventDefault();
-            this.closeDropdown();
-            this.trigger.focus();
-            break;
-        }
-      });
-    });
-
     // Add event listener for the select event
     this.wrapper.addEventListener("select", (e) => {
       if (this.updateLabelOnSelect) {
@@ -101,6 +73,43 @@ class SimpleSelect {
           selectedOption.classList.add("simple-select-selected");
         }
       }
+    });
+  }
+
+  attachOptionListeners() {
+    // Remove existing listeners to avoid duplicates
+    this.options.forEach((option) => {
+      option.replaceWith(option.cloneNode(true));
+    });
+
+    // Reinitialize options and attach listeners
+    this.options = Array.from(
+      this.wrapper.querySelectorAll(".simple-select-option"),
+    );
+
+    this.options.forEach((option, index) => {
+      option.setAttribute("tabindex", "-1");
+      option.addEventListener("click", () => this.selectOption(option));
+      option.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "Enter":
+            this.selectOption(option);
+            break;
+          case "ArrowDown":
+            e.preventDefault();
+            this.focusNextOption(index);
+            break;
+          case "ArrowUp":
+            e.preventDefault();
+            this.focusPreviousOption(index);
+            break;
+          case "Escape":
+            e.preventDefault();
+            this.closeDropdown();
+            this.trigger.focus();
+            break;
+        }
+      });
     });
   }
 
@@ -178,6 +187,11 @@ class SimpleSelect {
     const prevIndex =
       currentIndex > 0 ? currentIndex - 1 : this.options.length - 1;
     this.options[prevIndex].focus();
+  }
+
+  // Method to refresh options when new ones are added
+  refreshOptions() {
+    this.attachOptionListeners();
   }
 }
 
